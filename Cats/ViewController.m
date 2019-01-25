@@ -14,6 +14,7 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITextField *searchField;
 
 @property (strong,nonatomic)NSMutableArray<PhotoData*> *photoDataArray;
 
@@ -28,13 +29,19 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.photoDataArray = [[NSMutableArray alloc]init];
+    
     [self setUpLayout];
     self.collectionView.collectionViewLayout = self.myLayout;
     
     
     //get the url
-    NSURL *url = [NSURL URLWithString:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=93fd6c96963fd57630a83037c18d735e&tags=cat"]; // 1
+    [self getImagesWithTag:@"dog"];
+    
+}
+-(void)getImagesWithTag:(NSString*)tag{
+    self.photoDataArray = [[NSMutableArray alloc]init];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=93fd6c96963fd57630a83037c18d735e&tags=%@",tag ];
+    NSURL *url = [NSURL URLWithString:urlString]; // 1
     
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:url]; // 2
     
@@ -75,12 +82,12 @@
             [self.photoDataArray addObject:photoData];
         }
         
-
+        
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                            // This will run on the main queue
-                            [self.collectionView reloadData];
-                        }];
+            // This will run on the main queue
+            [self.collectionView reloadData];
+        }];
     }];
     
     [dataTask resume]; // 6
@@ -96,9 +103,11 @@
     
     self.myLayout.headerReferenceSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 80);
 }
-- (IBAction)pressedSearch:(UITextField*)sender {
-    
+- (IBAction)pressedSearch:(UIButton*)sender {
+    NSLog(@"pressed search");
+    [self getImagesWithTag:self.searchField.text];
 }
+
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
