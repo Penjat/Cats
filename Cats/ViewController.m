@@ -8,11 +8,14 @@
 
 #import "ViewController.h"
 #import "ImageCell.h"
+#import "PhotoData.h"
+#import "DetailsViewController.h"
 
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong,nonatomic)NSMutableArray<NSString*> *urlArray;//an array of all the url data
+
+@property (strong,nonatomic)NSMutableArray<PhotoData*> *photoDataArray;
 
 @property (strong,nonatomic)UICollectionViewFlowLayout *myLayout;
 @end
@@ -25,7 +28,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.urlArray = [[NSMutableArray alloc]init];
+    self.photoDataArray = [[NSMutableArray alloc]init];
     [self setUpLayout];
     self.collectionView.collectionViewLayout = self.myLayout;
     
@@ -62,9 +65,14 @@
         
         for(NSDictionary *photo in catDictionary){
             
+            PhotoData *photoData = [[PhotoData alloc]init];
             //
             NSString *urlString = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",photo[@"farm"],photo[@"server"],photo[@"id"],photo[@"secret"]];
-            [self.urlArray addObject:urlString];
+            
+            
+            photoData.url = urlString;
+            photoData.imageName = photo[@"title"];
+            [self.photoDataArray addObject:photoData];
         }
         
 
@@ -78,29 +86,53 @@
     [dataTask resume]; // 6
     
 }
+
 -(void)setUpLayout{
     self.myLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.myLayout.itemSize = CGSizeMake(190, 190);
+    self.myLayout.itemSize = CGSizeMake(190, 230);
     self.myLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
     self.myLayout.minimumLineSpacing = 20;
     self.myLayout.minimumInteritemSpacing = 5;
     
     self.myLayout.headerReferenceSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 80);
 }
+- (IBAction)pressedSearch:(UITextField*)sender {
+    
+}
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.urlArray.count;
+    return self.photoDataArray.count;
+}
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"cell was selected");
+    [self performSegueWithIdentifier:@"toDetails" sender:self.photoDataArray[indexPath.row]];
+    
+    return YES;
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    //TODO make sure is the right class
+    DetailsViewController *details = (DetailsViewController*)segue.destinationViewController;
+    details.photoData = (PhotoData*)sender;
+    
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
                                    cellForItemAtIndexPath:(nonnull NSIndexPath*)indexPath{
     ImageCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"myCell" forIndexPath:indexPath];
+    [cell prepareForReuse];
+    PhotoData *photoData = self.photoDataArray[indexPath.row];
+    cell.imageName.text = photoData.imageName;
+    cell.photoData = photoData;
+    if(photoData.image != nil){
+        cell.image.image = photoData.image;
+        return cell;
+    }
     
-    NSURL *url = [NSURL URLWithString:self.urlArray[indexPath.row]]; // 1
+    NSURL *url = [NSURL URLWithString:self.photoDataArray[indexPath.row].url]; // 1
     
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:url]; // 2
+    
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration]; // 3
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration]; // 4
@@ -115,7 +147,7 @@
         
         NSData *data = [NSData dataWithContentsOfURL:location];
         UIImage *image = [UIImage imageWithData:data]; // 2
-        
+        photoData.image = image;
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             // This will run on the main queue
             

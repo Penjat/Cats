@@ -16,6 +16,8 @@
 		0B10587F21FA6DFE00A4FEF2 /* CatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B10587E21FA6DFE00A4FEF2 /* CatsTests.m */; };
 		0B10588A21FA6DFE00A4FEF2 /* CatsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B10588921FA6DFE00A4FEF2 /* CatsUITests.m */; };
 		0B10589921FA7B7600A4FEF2 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B10589821FA7B7600A4FEF2 /* ImageCell.m */; };
+		0B10589C21FA7F8B00A4FEF2 /* PhotoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B10589B21FA7F8B00A4FEF2 /* PhotoData.m */; };
+		0B10589F21FA88FA00A4FEF2 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B10589E21FA88FA00A4FEF2 /* DetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 		0B10588B21FA6DFE00A4FEF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B10589721FA7B7600A4FEF2 /* ImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		0B10589821FA7B7600A4FEF2 /* ImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
+		0B10589A21FA7F8B00A4FEF2 /* PhotoData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoData.h; sourceTree = "<group>"; };
+		0B10589B21FA7F8B00A4FEF2 /* PhotoData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoData.m; sourceTree = "<group>"; };
+		0B10589D21FA88FA00A4FEF2 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		0B10589E21FA88FA00A4FEF2 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +114,12 @@
 				0B10586621FA6DFD00A4FEF2 /* AppDelegate.m */,
 				0B10586821FA6DFD00A4FEF2 /* ViewController.h */,
 				0B10586921FA6DFE00A4FEF2 /* ViewController.m */,
+				0B10589D21FA88FA00A4FEF2 /* DetailsViewController.h */,
+				0B10589E21FA88FA00A4FEF2 /* DetailsViewController.m */,
 				0B10589721FA7B7600A4FEF2 /* ImageCell.h */,
 				0B10589821FA7B7600A4FEF2 /* ImageCell.m */,
+				0B10589A21FA7F8B00A4FEF2 /* PhotoData.h */,
+				0B10589B21FA7F8B00A4FEF2 /* PhotoData.m */,
 				0B10586B21FA6DFE00A4FEF2 /* Main.storyboard */,
 				0B10586E21FA6DFE00A4FEF2 /* Assets.xcassets */,
 				0B10587021FA6DFE00A4FEF2 /* LaunchScreen.storyboard */,
@@ -270,6 +280,8 @@
 				0B10586A21FA6DFE00A4FEF2 /* ViewController.m in Sources */,
 				0B10589921FA7B7600A4FEF2 /* ImageCell.m in Sources */,
 				0B10587521FA6DFE00A4FEF2 /* main.m in Sources */,
+				0B10589F21FA88FA00A4FEF2 /* DetailsViewController.m in Sources */,
+				0B10589C21FA7F8B00A4FEF2 /* PhotoData.m in Sources */,
 				0B10586721FA6DFD00A4FEF2 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

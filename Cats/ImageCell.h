@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ImageCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UILabel *imageName;
+@property (strong,nonatomic)PhotoData *photoData;
 
 @end
 
