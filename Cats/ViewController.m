@@ -15,6 +15,7 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
+@property (weak, nonatomic) IBOutlet UILabel *noResultsLabel;
 
 @property (strong,nonatomic)NSMutableArray<PhotoData*> *photoDataArray;
 
@@ -33,12 +34,13 @@
     [self setUpLayout];
     self.collectionView.collectionViewLayout = self.myLayout;
     
-    
+    self.noResultsLabel.hidden = YES;
     //get the url
     [self getImagesWithTag:@"dog"];
     
 }
 -(void)getImagesWithTag:(NSString*)tag{
+    self.noResultsLabel.hidden = YES;
     self.photoDataArray = [[NSMutableArray alloc]init];
     NSString *urlString = [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=93fd6c96963fd57630a83037c18d735e&tags=%@",tag ];
     NSURL *url = [NSURL URLWithString:urlString]; // 1
@@ -84,8 +86,12 @@
         
         
         
+        
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             // This will run on the main queue
+            if(self.photoDataArray.count == 0){
+                self.noResultsLabel.hidden = NO;
+            }
             [self.collectionView reloadData];
         }];
     }];

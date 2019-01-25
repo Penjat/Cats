@@ -81,6 +81,12 @@
                                     <action selector="pressedSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h4P-rg-Fdq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No results found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YdB-zj-jd5">
+                                <rect key="frame" x="94" y="323" width="191" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -90,6 +96,8 @@
                             <constraint firstItem="BBi-D2-8Rv" firstAttribute="top" secondItem="s4d-iW-541" secondAttribute="bottom" constant="8" id="Pxr-4n-F9a"/>
                             <constraint firstItem="gGg-w9-hoi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="QAc-Qb-a0q"/>
                             <constraint firstItem="s4d-iW-541" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="R5T-o7-oox"/>
+                            <constraint firstItem="YdB-zj-jd5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Vde-nB-lo6"/>
+                            <constraint firstItem="YdB-zj-jd5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="aff-8v-LCm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BBi-D2-8Rv" secondAttribute="trailing" id="d6d-gs-vjU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gGg-w9-hoi" secondAttribute="trailing" constant="8" id="g05-Qr-S2T"/>
                             <constraint firstItem="s4d-iW-541" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="t2A-Gx-vcY"/>
@@ -102,6 +110,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="BBi-D2-8Rv" id="c7g-ru-dTZ"/>
+                        <outlet property="noResultsLabel" destination="YdB-zj-jd5" id="QFY-yi-oE5"/>
                         <outlet property="searchField" destination="s4d-iW-541" id="VBQ-ty-AAB"/>
                         <segue destination="IaE-9T-K8k" kind="show" identifier="toDetails" id="aEQ-aR-L2u"/>
                     </connections>
